@@ -2,13 +2,15 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import './ModeloDetalhe.css';
 
+const BASE = import.meta.env.BASE_URL;
+
 const WHATSAPP_BASE = 'https://wa.me/551341412112';
 
 const modelos = {
   removivel: {
     nome: 'Tela removível',
     uso: 'Para janelas',
-    imagem: '/site/catalogo-tela-removivel.webp',
+    imagem: `${BASE}site/catalogo-tela-removivel.webp`,
     resumo: 'Proteção discreta, feita sob medida e fácil de retirar quando você precisar limpar a janela ou a própria tela.',
     destaques: ['Encaixe sob medida', 'Remoção simples', 'Acabamento discreto'],
     indicado: 'Janelas de correr, janelas guilhotina e vitrôs basculantes que permitam um encaixe seguro e bem ajustado.',
@@ -17,7 +19,7 @@ const modelos = {
   'de-correr': {
     nome: 'Tela de correr',
     uso: 'Para esquadrias com trilho',
-    imagem: '/site/catalogo-tela-correr.png',
+    imagem: `${BASE}site/catalogo-tela-correr.png`,
     resumo: 'Uma solução integrada à esquadria, com deslizamento leve para acompanhar a abertura e o fechamento da janela.',
     destaques: ['Movimento suave', 'Uso cotidiano', 'Integração ao trilho'],
     indicado: 'Janelas e portas que já possuem trilho compatível ou espaço adequado para a instalação de uma folha deslizante.',
@@ -26,7 +28,7 @@ const modelos = {
   'de-recolher': {
     nome: 'Tela de recolher',
     uso: 'Para portas e vãos amplos',
-    imagem: '/site/catalogo-tela-recolher.png',
+    imagem: `${BASE}site/catalogo-tela-recolher.png`,
     resumo: 'A tela permanece protegida no sistema quando não está em uso e pode ser acionada sempre que o ambiente precisar de proteção.',
     destaques: ['Abertura livre', 'Uso sob demanda', 'Sistema compacto'],
     indicado: 'Portas, varandas e vãos amplos em que seja importante liberar a passagem quando a tela não estiver sendo utilizada.',
@@ -35,7 +37,7 @@ const modelos = {
   'porta-de-giro': {
     nome: 'Porta de giro',
     uso: 'Para portas de passagem',
-    imagem: '/site/porta-giro.png',
+    imagem: `${BASE}site/porta-giro.png`,
     resumo: 'Uma porta telada independente, resistente e prática para proteger áreas de passagem sem interromper a rotina da casa.',
     destaques: ['Estrutura resistente', 'Passagem prática', 'Feita sob medida'],
     indicado: 'Portas de entrada, cozinhas, áreas de serviço, varandas e outros acessos usados com frequência.',
@@ -47,22 +49,22 @@ const tutorialRemovivel = [
   {
     titulo: 'Janela de correr com 2 folhas',
     texto: 'Meça apenas uma folha móvel. L é a largura dessa folha e A é a altura da folha.',
-    imagem: '/site/tutorial-removivel/janela-correr-2-folhas.png',
+    imagem: `${BASE}site/tutorial-removivel/janela-correr-2-folhas.png`,
   },
   {
     titulo: 'Janela de correr com 4 folhas',
     texto: 'Meça juntas as duas folhas móveis do meio. L é a largura total das duas folhas e A é a altura delas.',
-    imagem: '/site/tutorial-removivel/janela-correr-4-folhas.png',
+    imagem: `${BASE}site/tutorial-removivel/janela-correr-4-folhas.png`,
   },
   {
     titulo: 'Janela guilhotina com 2 folhas',
     texto: 'Meça somente a folha móvel de baixo. L é a largura e A é a altura dessa folha.',
-    imagem: '/site/tutorial-removivel/janela-guilhotina.png',
+    imagem: `${BASE}site/tutorial-removivel/janela-guilhotina.png`,
   },
   {
     titulo: 'Vitrô basculante',
     texto: 'Meça a folha inteira do basculante. L é a largura total e A é a altura total da folha.',
-    imagem: '/site/tutorial-removivel/vitro-basculante.png',
+    imagem: `${BASE}site/tutorial-removivel/vitro-basculante.png`,
   },
 ];
 
@@ -70,17 +72,17 @@ const tutorialCorrer = [
   {
     titulo: 'Janela de correr com 2 folhas',
     texto: 'Meça apenas uma folha móvel. L é a largura dessa folha e A é a altura da folha.',
-    imagem: '/site/tutorial-correr/janela-correr-2-folhas.png',
+    imagem: `${BASE}site/tutorial-correr/janela-correr-2-folhas.png`,
   },
   {
     titulo: 'Janela de correr com 4 folhas',
     texto: 'Meça juntas as duas folhas móveis do meio. L é a largura total das duas folhas e A é a altura delas.',
-    imagem: '/site/tutorial-correr/janela-correr-4-folhas.png',
+    imagem: `${BASE}site/tutorial-correr/janela-correr-4-folhas.png`,
   },
   {
     titulo: 'Porta de sacada de correr',
     texto: 'Meça a folha de vidro móvel inteira. L é a largura da folha e A é a altura total da folha de vidro.',
-    imagem: '/site/tutorial-correr/porta-sacada-correr.png',
+    imagem: `${BASE}site/tutorial-correr/porta-sacada-correr.png`,
   },
 ];
 
@@ -88,7 +90,7 @@ const tutorialPortaGiro = [
   {
     titulo: 'Porta de giro de madeira ou alumínio',
     texto: 'Meça a porta inteira. L é a largura total da porta e A é a altura total da porta.',
-    imagem: '/site/tutorial-porta-giro/porta-giro.png',
+    imagem: `${BASE}site/tutorial-porta-giro/porta-giro.png`,
   },
 ];
 
@@ -96,7 +98,7 @@ const tutorialRecolher = [
   {
     titulo: 'Medidas do vão para tela de recolher',
     texto: 'Meça a largura e a altura internas do vão em três pontos e informe a menor medida encontrada. Confirme também pelo menos 10 cm de profundidade nas laterais e no topo.',
-    imagem: '/site/tutorial-recolher/medidas-tela-recolher.png',
+    imagem: `${BASE}site/tutorial-recolher/medidas-tela-recolher.png`,
     poster: true,
   },
 ];
@@ -219,7 +221,7 @@ export default function ModeloDetalhe() {
 
   return <div className="produto-pagina">
     <header className="produto-header">
-      <Link to="/" className="produto-logo" aria-label="Mosquiteira.com — início"><img src="/logo.png" alt="Mosquiteira.com" /></Link>
+      <Link to="/" className="produto-logo" aria-label="Mosquiteira.com — início"><img src={`${BASE}logo.png`} alt="Mosquiteira.com" /></Link>
       <nav aria-label="Navegação da página do produto">
         <Link to="/#modelos">← Todos os modelos</Link>
         <a className="produto-header-cta" href={whatsapp} target="_blank" rel="noreferrer">Solicitar orçamento <span>↗</span></a>
@@ -269,7 +271,7 @@ export default function ModeloDetalhe() {
       <section className="produto-cta"><div className="produto-container"><p className="produto-eyebrow">Atendimento humano do início ao fim</p><h2>Seu espaço.<br />Sua medida.</h2><p>Envie uma foto e descubra qual solução funciona melhor para a sua casa.</p><a className="produto-botao" href={whatsapp} target="_blank" rel="noreferrer">Solicitar orçamento <span>↗</span></a></div></section>
     </main>
 
-    <footer className="produto-footer"><div className="produto-container"><img src="/logo.png" alt="Mosquiteira.com" /><p>Telas mosquiteiras sob medida<br />em Santos.</p><Link to="/">Voltar à página inicial ↑</Link></div></footer>
+    <footer className="produto-footer"><div className="produto-container"><img src={`${BASE}logo.png`} alt="Mosquiteira.com" /><p>Telas mosquiteiras sob medida<br />em Santos.</p><Link to="/">Voltar à página inicial ↑</Link></div></footer>
 
     {imagemAmpliada && <div className="produto-lightbox" role="dialog" aria-modal="true" aria-label="Visualização ampliada da imagem" onClick={(evento) => { if (evento.target === evento.currentTarget) setImagemAmpliada(null); }}>
       <button type="button" className="produto-lightbox-fechar" onClick={() => setImagemAmpliada(null)} aria-label="Fechar imagem ampliada" autoFocus>×</button>

@@ -1,26 +1,28 @@
 import { useEffect, useState } from 'react';
 import './SitePublico.css';
 
+const BASE = import.meta.env.BASE_URL;
+
 const WHATSAPP = 'https://wa.me/551341412112?text=Ol%C3%A1%21%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento%20online%20de%20telas%20mosquiteiras.%20Podem%20me%20orientar%20sobre%20as%20fotos%20e%20medidas%20iniciais%3F';
 
 const modelos = [
-  { nome: 'Removível', slug: 'removivel', uso: 'Para janelas', texto: 'Encaixe preciso e remoção simples para limpeza.', imagem: '/site/catalogo-tela-removivel.webp' },
-  { nome: 'De correr', slug: 'de-correr', uso: 'Para esquadrias com trilho', texto: 'Movimento leve e acabamento integrado ao ambiente.', imagem: '/site/catalogo-tela-correr.png' },
-  { nome: 'De recolher', slug: 'de-recolher', uso: 'Para portas e vãos amplos', texto: 'Proteção prática, disponível somente quando necessária.', imagem: '/site/catalogo-tela-recolher.png' },
-  { nome: 'Porta de giro', slug: 'porta-de-giro', uso: 'Para portas de passagem', texto: 'Abertura prática e estrutura resistente para proteger áreas de passagem.', imagem: '/site/porta-giro.png' },
+  { nome: 'Removível', slug: 'removivel', uso: 'Para janelas', texto: 'Encaixe preciso e remoção simples para limpeza.', imagem: `${BASE}site/catalogo-tela-removivel.webp` },
+  { nome: 'De correr', slug: 'de-correr', uso: 'Para esquadrias com trilho', texto: 'Movimento leve e acabamento integrado ao ambiente.', imagem: `${BASE}site/catalogo-tela-correr.png` },
+  { nome: 'De recolher', slug: 'de-recolher', uso: 'Para portas e vãos amplos', texto: 'Proteção prática, disponível somente quando necessária.', imagem: `${BASE}site/catalogo-tela-recolher.png` },
+  { nome: 'Porta de giro', slug: 'porta-de-giro', uso: 'Para portas de passagem', texto: 'Abertura prática e estrutura resistente para proteger áreas de passagem.', imagem: `${BASE}site/porta-giro.png` },
 ];
 
 const clientes = [
-  ['Santos FC', '/site/clientes/santos-fc.png'],
-  ['Hortifrutti', '/site/clientes/hortifrutti.png'],
-  ['Clínica Radiológica de Santos', '/site/clientes/clinica-radiologica.webp'],
-  ['Sindaport', '/site/clientes/sindaport.png'],
-  ['Sodiê Doces', '/site/clientes/sodie.png'],
-  ['Unifesp', '/site/clientes/unifesp.png'],
-  ['Amil', '/site/clientes/amil.png'],
-  ['Record TV', '/site/clientes/record-tv.png'],
-  ['Hospital Ana Costa', '/site/clientes/ana-costa.webp'],
-  ['Prevent Senior', '/site/clientes/prevent-senior.png'],
+  ['Santos FC', `${BASE}site/clientes/santos-fc.png`],
+  ['Hortifrutti', `${BASE}site/clientes/hortifrutti.png`],
+  ['Clínica Radiológica de Santos', `${BASE}site/clientes/clinica-radiologica.webp`],
+  ['Sindaport', `${BASE}site/clientes/sindaport.png`],
+  ['Sodiê Doces', `${BASE}site/clientes/sodie.png`],
+  ['Unifesp', `${BASE}site/clientes/unifesp.png`],
+  ['Amil', `${BASE}site/clientes/amil.png`],
+  ['Record TV', `${BASE}site/clientes/record-tv.png`],
+  ['Hospital Ana Costa', `${BASE}site/clientes/ana-costa.webp`],
+  ['Prevent Senior', `${BASE}site/clientes/prevent-senior.png`],
 ];
 
 const perguntas = [
@@ -32,7 +34,7 @@ const perguntas = [
 ];
 
 function Marca() {
-  return <span className="luxo-marca"><img src="/logo.png" alt="Mosquiteira.com — a solução contra mosquitos" /></span>;
+  return <span className="luxo-marca"><img src={`${BASE}logo.png`} alt="Mosquiteira.com — a solução contra mosquitos" /></span>;
 }
 
 export default function SitePublico() {
@@ -279,7 +281,7 @@ export default function SitePublico() {
       <section className="luxo-modelos luxo-secao" id="modelos">
         <div className="luxo-container">
           <div className="luxo-secao-cabecalho"><div><p className="luxo-sobretitulo escuro">Soluções sob medida</p><h2>Uma solução precisa<br />para cada tipo de vão.</h2></div><p>Envie uma foto e nossa equipe recomenda o sistema mais adequado ao seu espaço.</p></div>
-          <div className="luxo-modelos-grid">{modelos.map((modelo, indice) => <article className="luxo-modelo" key={modelo.nome}><a className="luxo-modelo-visual" href={`/modelos/${modelo.slug}`}><span>0{indice + 1}</span><img src={modelo.imagem} alt={`Tela mosquiteira ${modelo.nome}`} loading="lazy" /></a><div className="luxo-modelo-info"><small>{modelo.uso}</small><h3><a href={`/modelos/${modelo.slug}`}>{modelo.nome}</a></h3><p>{modelo.texto}</p><a href={`/modelos/${modelo.slug}`}>Conhecer este modelo <span>→</span></a></div></article>)}</div>
+          <div className="luxo-modelos-grid">{modelos.map((modelo, indice) => <article className="luxo-modelo" key={modelo.nome}><a className="luxo-modelo-visual" href={`#/modelos/${modelo.slug}`}><span>0{indice + 1}</span><img src={modelo.imagem} alt={`Tela mosquiteira ${modelo.nome}`} loading="lazy" /></a><div className="luxo-modelo-info"><small>{modelo.uso}</small><h3><a href={`#/modelos/${modelo.slug}`}>{modelo.nome}</a></h3><p>{modelo.texto}</p><a href={`#/modelos/${modelo.slug}`}>Conhecer este modelo <span>→</span></a></div></article>)}</div>
         </div>
       </section>
 

@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  /* Paleta — herdada do projeto original, refinada para um sistema completo */
+  --app-fundo-claro:
+    radial-gradient(circle at 18% 15%, rgba(86, 165, 255, 0.34), transparent 28%),
+    radial-gradient(circle at 82% 22%, rgba(255, 163, 115, 0.28), transparent 27%),
+    radial-gradient(circle at 50% 86%, rgba(74, 190, 139, 0.26), transparent 30%),
+    linear-gradient(135deg, #eaf4ff 0%, #f7fbff 42%, #f4f0ff 100%);
+
+  --bg: transparent;
+  --bg-elevado: rgba(255, 255, 255, 0.9);
+  --bg-card: rgba(255, 255, 255, 0.88);
+  --bg-input: rgba(255, 255, 255, 0.94);
+  --borda: rgba(49, 67, 92, 0.18);
+  --borda-suave: rgba(49, 67, 92, 0.12);
+
+  --texto: #17202d;
+  --texto-suave: rgba(24, 32, 44, 0.76);
+  --texto-fraco: rgba(24, 32, 44, 0.56);
+
+  --primaria: #b8323a;
+  --primaria-hover: #d13b44;
+  --primaria-fraca: rgba(184, 50, 58, 0.15);
+
+  --sucesso: #168158;
+  --sucesso-fraca: #e8f7f0;
+  --alerta: #b66b12;
+  --alerta-fraca: #fff5e6;
+  --info: #2869c7;
+  --info-fraca: #eaf2ff;
+  --perigo: #b8323a;
+  --perigo-fraca: #fff0f1;
+
+  --raio-xs: 8px;
+  --raio-pequeno: 10px;
+  --raio: 14px;
+  --raio-grande: 18px;
+  --sombra-xs: 0 2px 8px rgba(31, 45, 65, 0.05);
+  --sombra: 0 8px 24px rgba(31, 45, 65, 0.08);
+  --sombra-alta: 0 20px 56px rgba(31, 45, 65, 0.16);
+  --espaco-1: 4px;
+  --espaco-2: 8px;
+  --espaco-3: 12px;
+  --espaco-4: 16px;
+  --espaco-5: 24px;
+  --espaco-6: 32px;
+  --transicao: 180ms cubic-bezier(0.2, 0.75, 0.2, 1);
+
+  --fonte-titulo: 'Poppins', sans-serif;
+  --fonte-corpo: 'Inter', sans-serif;
+  --painel-largura: 900px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: var(--fonte-corpo);
+  background: var(--app-fundo-claro);
+  background-attachment: fixed;
+  color: var(--texto);
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--fonte-titulo);
+  margin: 0;
+  font-weight: 600;
+  color: var(--texto);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--fonte-corpo);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(184, 50, 58, 0.26);
+  outline-offset: 3px;
+}
+
+input, select, textarea {
+  font-family: var(--fonte-corpo);
+  background: var(--bg-input);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-pequeno);
+  color: var(--texto);
+  min-height: 44px;
+  padding: 10px 13px;
+  font-size: 16px;
+  width: 100%;
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--texto-fraco);
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primaria);
+  box-shadow: 0 0 0 3px var(--primaria-fraca);
+  outline: none;
+}
+
+button, input, select, textarea {
+  transition: border-color var(--transicao), background-color var(--transicao), color var(--transicao), box-shadow var(--transicao), transform var(--transicao), opacity var(--transicao);
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+::selection {
+  color: #fff;
+  background: var(--primaria);
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--texto-suave);
+  margin-bottom: 5px;
+}
+
+.tela-carregando {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  color: var(--texto-suave);
+  background: var(--app-fundo-claro);
+  font-weight: 800;
+}
+
+@media (max-width: 720px) {
+  h1 {
+    font-size: 26px;
+    line-height: 1.12;
+  }
+
+  h2 {
+    font-size: 21px;
+    line-height: 1.16;
+  }
+
+  h3 {
+    font-size: 17px;
+    line-height: 1.18;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

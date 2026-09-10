@@ -98,7 +98,8 @@
 .luxo-provas strong { font-family: 'Inter Tight', sans-serif; font-size: 25px; font-weight: 500; letter-spacing: -.03em; }
 .luxo-provas span { margin-top: 4px; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .09em; }
 
-.luxo-evidencia { position: relative; overflow: hidden; background: radial-gradient(ellipse 48% 68% at 50% 48%, rgba(255,255,255,.3), transparent 72%), linear-gradient(118deg, #303438 0%, #595e62 50%, #292d30 100%); color: #fff; }
+.luxo-evidencia { position: relative; isolation: isolate; overflow: hidden; background: radial-gradient(ellipse 48% 68% at 50% 48%, rgba(255,255,255,.3), transparent 72%), linear-gradient(118deg, #303438 0%, #595e62 50%, #292d30 100%); color: #fff; }
+.luxo-evidencia-marca-dagua { position: absolute; z-index: 0; top: 50%; left: 50%; width: min(76vw, 740px); height: auto; transform: translate(-50%, -50%); filter: grayscale(1) invert(1); mix-blend-mode: screen; opacity: .12; pointer-events: none; user-select: none; }
 .luxo-evidencia > .luxo-container, .luxo-pagamento > .luxo-container, .luxo-cta > .luxo-container { position: relative; z-index: 1; }
 .luxo-evidencia-topo { display: grid; grid-template-columns: 7fr 5fr; gap: 90px; align-items: end; }
 .luxo-evidencia h2 { max-width: 760px; margin: 0; color: #fff; font-size: clamp(44px, 5vw, 72px); line-height: .98; letter-spacing: -.048em; }
@@ -279,6 +280,7 @@
   .luxo-secao-cabecalho { margin-bottom: 45px; }
   .luxo-secao-cabecalho h2, .luxo-pagamento h2, .luxo-faq h2 { font-size: 42px; }
   .luxo-evidencia h2 { font-size: 42px; }
+  .luxo-evidencia-marca-dagua { width: 115%; max-width: 600px; opacity: .09; }
   .luxo-evidencia-pontos { grid-template-columns: 1fr; margin-top: 48px; }
   .luxo-evidencia-pontos article, .luxo-evidencia-pontos article:not(:first-child) { min-height: auto; padding: 25px 0 30px; border-right: 0; border-bottom: 1px solid var(--line-dark); }
   .luxo-evidencia-pontos article:last-child { border-bottom: 0; }
@@ -315,4 +317,121 @@
   .luxo-cta h2 { font-size: 49px; }
   .luxo-footer-grid { grid-template-columns: 1fr; }
   .luxo-footer-grid > div:first-child { grid-column: auto; }
+}
+
+/* Refinamento responsivo: navegação, toque e telas compactas */
+@media (max-width: 1180px) {
+  .luxo-header { z-index: 60; padding-inline: max(28px, env(safe-area-inset-left)) max(28px, env(safe-area-inset-right)); }
+  .luxo-site.menu-aberto .luxo-header { backdrop-filter: none; }
+  .luxo-site.menu-aberto .luxo-whatsapp-fixo { opacity: 0; pointer-events: none; }
+  .luxo-menu-botao span { height: 2px; }
+  .luxo-menu-botao:active { transform: scale(.94); }
+  .luxo-header nav {
+    width: 100vw;
+    height: 100dvh;
+    padding: calc(84px + env(safe-area-inset-top)) max(32px, env(safe-area-inset-right)) calc(28px + env(safe-area-inset-bottom)) max(32px, env(safe-area-inset-left));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .luxo-header nav > a:not(.luxo-header-cta) {
+    min-height: 44px;
+    padding-block: 8px;
+    display: flex;
+    align-items: center;
+    font-size: clamp(21px, min(4vh, 5vw), 31px);
+  }
+  .luxo-header-cta { flex-shrink: 0; }
+}
+
+@media (max-width: 760px) {
+  .luxo-header, .luxo-site.pagina-rolada .luxo-header {
+    height: calc(72px + env(safe-area-inset-top));
+    padding: env(safe-area-inset-top) max(20px, env(safe-area-inset-right)) 0 max(20px, env(safe-area-inset-left));
+  }
+  .luxo-header .luxo-marca img { width: clamp(145px, 52vw, 190px); }
+  .luxo-header nav { padding: calc(80px + env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) calc(24px + env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left)); }
+  .luxo-header nav > a:not(.luxo-header-cta) { padding-block: 7px; font-size: clamp(20px, min(3.6vh, 7vw), 28px); }
+  .luxo-hero, .luxo-hero-grid { min-height: max(680px, 100svh); }
+  .luxo-secao-cabecalho h2, .luxo-pagamento h2, .luxo-faq h2, .luxo-evidencia h2 { font-size: clamp(34px, 11vw, 42px); }
+  .luxo-cta h2 { font-size: clamp(43px, 14vw, 56px); }
+  .luxo-modelos-grid { gap: 30px; }
+}
+
+@media (max-width: 480px) {
+  .luxo-provas > div { grid-template-columns: 1fr; }
+  .luxo-provas > div > div, .luxo-provas > div > div:nth-child(2), .luxo-provas > div > div:nth-last-child(-n+2) { min-height: 88px; border-right: 0; border-bottom: 1px solid var(--line-light); }
+  .luxo-provas > div > div:last-child { border-bottom: 0; }
+  .luxo-footer-grid { grid-template-columns: 1fr; }
+  .luxo-footer-grid > div:first-child { grid-column: auto; }
+  .luxo-footer-base { align-items: flex-start; flex-direction: column; gap: 16px; }
+}
+
+@media (max-height: 680px) and (max-width: 1180px) {
+  .luxo-header nav { gap: 0; padding-top: calc(70px + env(safe-area-inset-top)); }
+  .luxo-header nav > a:not(.luxo-header-cta) { min-height: 38px; padding-block: 5px; font-size: clamp(18px, 3.5vh, 23px); }
+  .luxo-header-cta { min-height: 48px; margin-top: 14px; }
+}
+
+/* Segunda revisão mobile: preserva a marca e usa um drawer proporcional */
+.luxo-menu-fundo { display: none; }
+
+@media (max-width: 1180px) {
+  .luxo-header > a { position: relative; z-index: 3; }
+  .luxo-menu-botao { z-index: 3; width: 44px; height: 44px; border: 1px solid rgba(9,9,9,.1); border-radius: 50%; background: rgba(9,9,9,.025); }
+  .luxo-menu-botao.aberto span { background: var(--ink); }
+  .luxo-menu-fundo { position: fixed; z-index: 0; inset: 72px 0 0; width: 100%; height: auto; padding: 0; display: block; visibility: hidden; opacity: 0; pointer-events: none; border: 0; background: rgba(9,9,9,.44); backdrop-filter: blur(3px); transition: opacity 240ms ease, visibility 240ms; }
+  .luxo-site.menu-aberto .luxo-menu-fundo { visibility: visible; opacity: 1; pointer-events: auto; }
+  .luxo-header nav {
+    z-index: 1;
+    inset: 72px 0 0 auto;
+    width: min(430px, 100%);
+    height: calc(100dvh - 72px);
+    padding: 28px 32px calc(28px + env(safe-area-inset-bottom));
+    gap: 2px;
+    box-shadow: -24px 20px 70px rgba(0,0,0,.22);
+    transform: translateX(28px);
+  }
+  .luxo-header nav.aberto { transform: none; }
+  .luxo-header nav > a:not(.luxo-header-cta) { min-height: 46px; padding-block: 8px; font-size: clamp(22px, 2.4vw, 26px); color: rgba(255,255,255,.78); }
+  .luxo-header nav > a:not(.luxo-header-cta):focus-visible, .luxo-header nav > a:not(.luxo-header-cta):hover { color: #fff; }
+  .luxo-header-cta { margin: 24px 0 0; }
+}
+
+@media (max-width: 760px) {
+  .luxo-header, .luxo-site.pagina-rolada .luxo-header { height: calc(64px + env(safe-area-inset-top)); }
+  .luxo-header .luxo-marca img { width: clamp(154px, 43vw, 164px); }
+  .luxo-menu-fundo { inset-block-start: calc(64px + env(safe-area-inset-top)); }
+  .luxo-header nav {
+    inset: calc(64px + env(safe-area-inset-top)) 0 0;
+    width: 100%;
+    height: calc(100dvh - 64px - env(safe-area-inset-top));
+    padding: 22px max(24px, env(safe-area-inset-right)) calc(24px + env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
+    box-shadow: none;
+  }
+  .luxo-header nav > a:not(.luxo-header-cta) { font-size: clamp(21px, 6.2vw, 24px); }
+  .luxo-hero { padding-top: calc(64px + env(safe-area-inset-top)); }
+  .luxo-hero, .luxo-hero-grid { min-height: 100svh; }
+  .luxo-hero-grid { padding-top: 0; }
+  .luxo-hero-copy { padding: clamp(64px, 10svh, 82px) 0 clamp(88px, 14svh, 120px); }
+  .luxo-hero h1 { font-size: clamp(42px, 11.5vw, 50px); }
+  .luxo-lead { max-width: 34ch; font-size: 15px; line-height: 1.5; }
+  .luxo-desenho { opacity: .16; }
+  .luxo-provas > div { grid-template-columns: 1fr 1fr; }
+  .luxo-provas > div > div, .luxo-provas > div > div:nth-child(2), .luxo-provas > div > div:nth-last-child(-n+2) { min-height: 96px; padding: 16px !important; }
+  .luxo-secao, .luxo-pagamento { padding-block: 70px; }
+  .luxo-secao-cabecalho { margin-bottom: 34px; }
+  .luxo-logos > div { height: 96px; padding: 14px; }
+  .luxo-faq summary { min-height: 64px; font-size: 16px; }
+  .luxo-faq details p { margin-right: 0; }
+  .luxo-footer .luxo-assinatura-conteudo { padding-block: 40px; }
+  .luxo-footer-grid { padding-top: 36px; gap: 28px 24px; }
+}
+
+@media (max-height: 560px) and (max-width: 1180px) {
+  .luxo-header nav > a:not(.luxo-header-cta) { min-height: 44px; padding-block: 5px; font-size: 19px; }
+  .luxo-header-cta { min-height: 48px; margin-top: 14px; }
+}
+
+@media (pointer: coarse) {
+  .luxo-modelo-visual img { filter: grayscale(.1); }
 }

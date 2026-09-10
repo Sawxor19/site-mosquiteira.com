@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './SitePublico.css';
 
 const BASE = import.meta.env.BASE_URL;
@@ -39,18 +39,43 @@ function Marca() {
 
 export default function SitePublico() {
   const [menuAberto, setMenuAberto] = useState(false);
+  const navegacaoRef = useRef(null);
+  const botaoMenuRef = useRef(null);
 
   useEffect(() => {
     document.title = 'Telas Mosquiteiras sob Medida em Santos | Mosquiteira.com';
-    const fecharComEsc = (evento) => { if (evento.key === 'Escape') setMenuAberto(false); };
+    const fecharComEsc = (evento) => {
+      if (evento.key === 'Escape') {
+        setMenuAberto(false);
+        botaoMenuRef.current?.focus();
+      }
+    };
     window.addEventListener('keydown', fecharComEsc);
     return () => window.removeEventListener('keydown', fecharComEsc);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = menuAberto ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    const overflowAnterior = document.body.style.overflow;
+    document.body.style.overflow = menuAberto ? 'hidden' : overflowAnterior;
+    if (menuAberto) botaoMenuRef.current?.focus();
+    return () => { document.body.style.overflow = overflowAnterior; };
   }, [menuAberto]);
+
+  useEffect(() => {
+    const consulta = window.matchMedia('(min-width: 1181px)');
+    const fecharNoDesktop = (evento) => { if (evento.matches) setMenuAberto(false); };
+    consulta.addEventListener('change', fecharNoDesktop);
+    return () => consulta.removeEventListener('change', fecharNoDesktop);
+  }, []);
+
+  const controlarTecladoMenu = (evento) => {
+    if (!menuAberto || evento.key !== 'Tab') return;
+    const focaveis = [botaoMenuRef.current, ...navegacaoRef.current.querySelectorAll('a')].filter(Boolean);
+    const primeiro = focaveis[0];
+    const ultimo = focaveis.at(-1);
+    if (evento.shiftKey && document.activeElement === primeiro) { evento.preventDefault(); ultimo.focus(); }
+    else if (!evento.shiftKey && document.activeElement === ultimo) { evento.preventDefault(); primeiro.focus(); }
+  };
 
   useEffect(() => {
     const raiz = document.querySelector('.luxo-site');
@@ -193,14 +218,15 @@ export default function SitePublico() {
 
   const fecharMenu = () => setMenuAberto(false);
 
-  return <div className="luxo-site">
+  return <div className={`luxo-site ${menuAberto ? 'menu-aberto' : ''}`}>
     <div className="luxo-progresso" aria-hidden="true"><span /></div>
     <a className="luxo-pular" href="#conteudo">Pular para o conteúdo</a>
 
     <header className="luxo-header">
       <a href="#inicio" aria-label="Mosquiteira.com — início"><Marca /></a>
-      <button className={`luxo-menu-botao ${menuAberto ? 'aberto' : ''}`} type="button" aria-label={menuAberto ? 'Fechar menu' : 'Abrir menu'} aria-controls="luxo-menu" aria-expanded={menuAberto} onClick={() => setMenuAberto(!menuAberto)}><span></span><span></span></button>
-      <nav id="luxo-menu" className={menuAberto ? 'aberto' : ''} aria-label="Navegação principal">
+      <button ref={botaoMenuRef} className={`luxo-menu-botao ${menuAberto ? 'aberto' : ''}`} type="button" aria-label={menuAberto ? 'Fechar menu' : 'Abrir menu'} aria-controls="luxo-menu" aria-expanded={menuAberto} onKeyDown={controlarTecladoMenu} onClick={() => setMenuAberto(!menuAberto)}><span></span><span></span></button>
+      <button className="luxo-menu-fundo" type="button" aria-label="Fechar menu" tabIndex={-1} onClick={fecharMenu} />
+      <nav ref={navegacaoRef} id="luxo-menu" className={menuAberto ? 'aberto' : ''} aria-label="Navegação principal" onKeyDown={controlarTecladoMenu}>
         <a href="#inicio" onClick={fecharMenu}>Início</a>
         <a href="#saude" onClick={fecharMenu}>OMS</a>
         <a href="#processo" onClick={fecharMenu}>Como funciona</a>
@@ -244,6 +270,7 @@ export default function SitePublico() {
       <section className="luxo-provas" aria-label="Números da empresa"><div className="luxo-container"><div><strong>+2.600</strong><span>clientes atendidos</span></div><div><strong>+10 anos</strong><span>protegendo seu lar e sua família</span></div><div><strong>Fabricação</strong><span>sob medida</span></div><div><strong>Pagamento no final</strong><span>somente após a instalação</span></div></div></section>
 
       <section className="luxo-evidencia luxo-secao" id="saude" aria-labelledby="titulo-evidencia">
+        <img className="luxo-evidencia-marca-dagua" src={`${BASE}site/oms.jpg`} alt="" aria-hidden="true" width="870" height="759" loading="lazy" decoding="async" />
         <div className="luxo-container">
           <div className="luxo-evidencia-topo">
             <div>

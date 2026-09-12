@@ -25,14 +25,6 @@ const clientes = [
   ['Prevent Senior', `${BASE}site/clientes/prevent-senior.png`],
 ];
 
-const perguntas = [
-  ['Preciso saber medir?', 'Não. Tenha uma trena e um celular em mãos. Nossa equipe orienta quais fotos fazer e quais medidas iniciais enviar.'],
-  ['Preciso receber uma visita para saber os valores?', 'Não. O orçamento começa online pelo WhatsApp. A visita presencial acontece somente após sua aprovação, para conferirmos as medidas.'],
-  ['O que acontece depois da medição?', 'Fabricamos o pedido sob medida. Quando tudo estiver pronto, entramos em contato para escolher a melhor data de instalação.'],
-  ['Quando faço o pagamento?', 'Somente após as telas estarem instaladas em sua residência.'],
-  ['Como sei qual modelo escolher?', 'Envie fotos do espaço. Nossa equipe analisa o tipo de vão e orienta a solução mais adequada.'],
-];
-
 function Marca() {
   return <span className="luxo-marca"><img src={`${BASE}logo.png`} alt="Mosquiteira.com — a solução contra mosquitos" /></span>;
 }
@@ -228,12 +220,11 @@ export default function SitePublico() {
       <button className="luxo-menu-fundo" type="button" aria-label="Fechar menu" tabIndex={-1} onClick={fecharMenu} />
       <nav ref={navegacaoRef} id="luxo-menu" className={menuAberto ? 'aberto' : ''} aria-label="Navegação principal" onKeyDown={controlarTecladoMenu}>
         <a href="#inicio" onClick={fecharMenu}>Início</a>
-        <a href="#saude" onClick={fecharMenu}>OMS</a>
         <a href="#processo" onClick={fecharMenu}>Como funciona</a>
         <a href="#modelos" onClick={fecharMenu}>Catálogo</a>
-        <a href="#pagamento" onClick={fecharMenu}>Pagamento</a>
         <a href="#clientes" onClick={fecharMenu}>Clientes</a>
-        <a href="#perguntas" onClick={fecharMenu}>Perguntas frequentes</a>
+        <a href="#saude" onClick={fecharMenu}>OMS</a>
+        <a href="#pagamento" onClick={fecharMenu}>Pagamento</a>
         <a className="luxo-header-cta" href="#contato" onClick={fecharMenu}>Solicite seu orçamento <span>↓</span></a>
       </nav>
     </header>
@@ -267,7 +258,34 @@ export default function SitePublico() {
         </div>
       </section>
 
-      <section className="luxo-provas" aria-label="Números da empresa"><div className="luxo-container"><div><strong>+2.600</strong><span>clientes atendidos</span></div><div><strong>+10 anos</strong><span>protegendo seu lar e sua família</span></div><div><strong>Fabricação</strong><span>sob medida</span></div><div><strong>Pagamento no final</strong><span>somente após a instalação</span></div></div></section>
+      <section className="luxo-provas" aria-label="Números da empresa"><div className="luxo-container"><div><strong>+10 anos</strong><span>protegendo seu lar e sua família</span></div><div><strong>+2.600</strong><span>clientes atendidos</span></div><div><strong>Fabricação</strong><span>sob medida</span></div><div><strong>Pagamento no final</strong><span>somente após a instalação</span></div></div></section>
+
+      <section className="luxo-processo luxo-secao" id="processo">
+        <div className="luxo-container">
+          <div className="luxo-secao-cabecalho"><div><p className="luxo-sobretitulo escuro">Orientação do início ao fim</p><h2>Você envia as fotos.<br />Nós cuidamos dos próximos passos.</h2></div><p>Não sabe o que fotografar ou medir? Tudo bem. Pelo WhatsApp, mostramos exatamente o que precisamos para preparar seu orçamento.</p></div>
+          <ol className="luxo-etapas">
+            <li><span>01</span><h3>Orçamento online</h3><p>Com uma trena e um celular, envie as fotos indicadas. Orientamos as medidas iniciais e apresentamos os valores pelo WhatsApp.</p></li>
+            <li><span>02</span><h3>Conferência e fabricação</h3><p>Após sua aprovação, vamos ao local conferir as medidas e produzimos cada tela especialmente para o seu espaço.</p></li>
+            <li><span>03</span><h3>Instalação e pagamento</h3><p>Quando o pedido estiver pronto, combinamos a melhor data. Instalamos e você realiza o pagamento somente com o serviço concluído.</p></li>
+          </ol>
+          <a className="luxo-link destaque" href={WHATSAPP} target="_blank" rel="noreferrer">Começar pelo WhatsApp <span>↗</span></a>
+        </div>
+      </section>
+
+      <section className="luxo-modelos luxo-secao" id="modelos">
+        <div className="luxo-container">
+          <div className="luxo-secao-cabecalho"><div><p className="luxo-sobretitulo escuro">Soluções sob medida</p><h2>Uma solução precisa<br />para cada tipo de vão.</h2></div><p>Envie uma foto e nossa equipe recomenda o sistema mais adequado ao seu espaço.</p></div>
+          <div className="luxo-modelos-grid">{modelos.map((modelo, indice) => <article className="luxo-modelo" key={modelo.nome}><a className="luxo-modelo-visual" href={`#/modelos/${modelo.slug}`}><span>0{indice + 1}</span><img src={modelo.imagem} alt={`Tela mosquiteira ${modelo.nome}`} loading="lazy" /></a><div className="luxo-modelo-info"><small>{modelo.uso}</small><h3><a href={`#/modelos/${modelo.slug}`}>{modelo.nome}</a></h3><p>{modelo.texto}</p><a href={`#/modelos/${modelo.slug}`}>Conhecer este modelo <span>→</span></a></div></article>)}</div>
+        </div>
+      </section>
+
+      <section className="luxo-clientes luxo-secao" id="clientes">
+        <div className="luxo-container">
+          <div className="luxo-secao-cabecalho"><div><p className="luxo-sobretitulo escuro">Confiança construída desde 2014</p><h2>Mais de 2.600<br />clientes atendidos.</h2></div><p>Experiência em projetos residenciais, empresariais e institucionais.</p></div>
+          <p className="luxo-logos-titulo">Algumas empresas e instituições que já atendemos</p>
+          <div className="luxo-logos">{clientes.map(([nome, logo]) => <div key={nome}><img src={logo} alt={nome} loading="lazy" /></div>)}</div>
+        </div>
+      </section>
 
       <section className="luxo-evidencia luxo-secao" id="saude" aria-labelledby="titulo-evidencia">
         <img className="luxo-evidencia-marca-dagua" src={`${BASE}site/oms.jpg`} alt="" aria-hidden="true" width="870" height="759" loading="lazy" decoding="async" />
@@ -293,42 +311,11 @@ export default function SitePublico() {
         </div>
       </section>
 
-      <section className="luxo-processo luxo-secao" id="processo">
-        <div className="luxo-container">
-          <div className="luxo-secao-cabecalho"><div><p className="luxo-sobretitulo escuro">Orientação do início ao fim</p><h2>Você envia as fotos.<br />Nós cuidamos dos próximos passos.</h2></div><p>Não sabe o que fotografar ou medir? Tudo bem. Pelo WhatsApp, mostramos exatamente o que precisamos para preparar seu orçamento.</p></div>
-          <ol className="luxo-etapas">
-            <li><span>01</span><h3>Orçamento online</h3><p>Com uma trena e um celular, envie as fotos indicadas. Orientamos as medidas iniciais e apresentamos os valores pelo WhatsApp.</p></li>
-            <li><span>02</span><h3>Conferência e fabricação</h3><p>Após sua aprovação, vamos ao local conferir as medidas e produzimos cada tela especialmente para o seu espaço.</p></li>
-            <li><span>03</span><h3>Instalação e pagamento</h3><p>Quando o pedido estiver pronto, combinamos a melhor data. Instalamos e você realiza o pagamento somente com o serviço concluído.</p></li>
-          </ol>
-          <a className="luxo-link destaque" href={WHATSAPP} target="_blank" rel="noreferrer">Começar pelo WhatsApp <span>↗</span></a>
-        </div>
-      </section>
-
-      <section className="luxo-modelos luxo-secao" id="modelos">
-        <div className="luxo-container">
-          <div className="luxo-secao-cabecalho"><div><p className="luxo-sobretitulo escuro">Soluções sob medida</p><h2>Uma solução precisa<br />para cada tipo de vão.</h2></div><p>Envie uma foto e nossa equipe recomenda o sistema mais adequado ao seu espaço.</p></div>
-          <div className="luxo-modelos-grid">{modelos.map((modelo, indice) => <article className="luxo-modelo" key={modelo.nome}><a className="luxo-modelo-visual" href={`#/modelos/${modelo.slug}`}><span>0{indice + 1}</span><img src={modelo.imagem} alt={`Tela mosquiteira ${modelo.nome}`} loading="lazy" /></a><div className="luxo-modelo-info"><small>{modelo.uso}</small><h3><a href={`#/modelos/${modelo.slug}`}>{modelo.nome}</a></h3><p>{modelo.texto}</p><a href={`#/modelos/${modelo.slug}`}>Conhecer este modelo <span>→</span></a></div></article>)}</div>
-        </div>
-      </section>
+      <section className="luxo-cta" id="contato"><div className="luxo-container"><p className="luxo-sobretitulo">Orçamento online, com orientação humana</p><h2>Uma foto é<br />o primeiro passo.</h2><p>Nós mostramos quais fotos e medidas enviar pelo WhatsApp.</p><a className="luxo-botao" href={WHATSAPP} target="_blank" rel="noreferrer">Solicitar orçamento online <span>↗</span></a><small>Atendimento de segunda a sexta, das 9h às 17h.</small></div></section>
 
       <section className="luxo-pagamento" id="pagamento">
         <div className="luxo-container luxo-pagamento-grid"><p className="luxo-sobretitulo">Compromisso com a entrega</p><div><h2>O pagamento<br />vem por último.</h2><p>Primeiro, conferimos as medidas. Depois, fabricamos e instalamos. Você realiza o pagamento somente quando as telas estiverem instaladas em sua residência.</p><a className="luxo-botao" href={WHATSAPP} target="_blank" rel="noreferrer">Solicitar orçamento online <span>↗</span></a></div></div>
       </section>
-
-      <section className="luxo-clientes luxo-secao" id="clientes">
-        <div className="luxo-container">
-          <div className="luxo-secao-cabecalho"><div><p className="luxo-sobretitulo escuro">Confiança construída desde 2014</p><h2>Mais de 2.600<br />clientes atendidos.</h2></div><p>Experiência em projetos residenciais, empresariais e institucionais.</p></div>
-          <p className="luxo-logos-titulo">Algumas empresas e instituições que já atendemos</p>
-          <div className="luxo-logos">{clientes.map(([nome, logo]) => <div key={nome}><img src={logo} alt={nome} loading="lazy" /></div>)}</div>
-        </div>
-      </section>
-
-      <section className="luxo-faq luxo-secao" id="perguntas">
-        <div className="luxo-container luxo-faq-grid"><div><p className="luxo-sobretitulo escuro">Perguntas frequentes</p><h2>Simples desde<br />o primeiro contato.</h2></div><div>{perguntas.map(([pergunta, resposta]) => <details key={pergunta}><summary>{pergunta}<span>+</span></summary><p>{resposta}</p></details>)}</div></div>
-      </section>
-
-      <section className="luxo-cta" id="contato"><div className="luxo-container"><p className="luxo-sobretitulo">Orçamento online, com orientação humana</p><h2>Uma foto é<br />o primeiro passo.</h2><p>Nós mostramos quais fotos e medidas enviar pelo WhatsApp.</p><a className="luxo-botao" href={WHATSAPP} target="_blank" rel="noreferrer">Solicitar orçamento online <span>↗</span></a><small>Atendimento de segunda a sexta, das 9h às 17h.</small></div></section>
 
     </main>
 

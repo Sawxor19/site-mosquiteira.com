@@ -242,13 +242,6 @@ export default function ModeloDetalhe() {
         </div>
       </section>
 
-      <section className="produto-sobre">
-        <div className="produto-container produto-sobre-grid">
-          <div><p className="produto-eyebrow escuro">Pensada para o seu espaço</p><h2>Proteção que acompanha<br />a arquitetura da casa.</h2></div>
-          <div className="produto-sobre-textos"><article><small>INDICADA PARA</small><p>{modelo.indicado}</p></article><article><small>COMO FUNCIONA</small><p>{modelo.detalhe}</p></article></div>
-        </div>
-      </section>
-
       {temTutorial ? <section className="produto-tutorial" id="como-medir">
         <div className="produto-container">
           <div className="produto-tutorial-cabecalho">
@@ -267,6 +260,13 @@ export default function ModeloDetalhe() {
           <div><p>Fotografe o vão de frente e, se possível, envie também um detalhe da esquadria ou do trilho. Nossa equipe analisa o local e orienta quais medidas iniciais serão necessárias.</p><a className="produto-botao" href={whatsapp} target="_blank" rel="noreferrer">Enviar fotos pelo WhatsApp <span>↗</span></a></div>
         </div>
       </section>}
+
+      <section className="produto-sobre">
+        <div className="produto-container produto-sobre-grid">
+          <div><p className="produto-eyebrow escuro">Pensada para o seu espaço</p><h2>Proteção que acompanha<br />a arquitetura da casa.</h2></div>
+          <div className="produto-sobre-textos"><article><small>INDICADA PARA</small><p>{modelo.indicado}</p></article><article><small>COMO FUNCIONA</small><p>{modelo.detalhe}</p></article></div>
+        </div>
+      </section>
 
       <section className="produto-cta"><div className="produto-container"><p className="produto-eyebrow">Atendimento humano do início ao fim</p><h2>Seu espaço.<br />Sua medida.</h2><p>Envie uma foto e descubra qual solução funciona melhor para a sua casa.</p><a className="produto-botao" href={whatsapp} target="_blank" rel="noreferrer">Solicitar orçamento <span>↗</span></a></div></section>
     </main>
